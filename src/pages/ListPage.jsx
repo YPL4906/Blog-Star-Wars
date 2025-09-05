@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import useGlobalReducer from "../hooks/useGlobalReducer";
+import React, { useEffect, useContext } from "react";
+import { Context } from "../appContext";
 import { ItemCard } from "../components/Card";
 
 export const ListPage = ({ type, title }) => {
-	const { store, dispatch } = useGlobalReducer();
+	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		if (type === "people") dispatch.loadPeople();
-		if (type === "planets") dispatch.loadPlanets();
-		if (type === "vehicles") dispatch.loadVehicles();
+		if (type === "people") actions.loadPeople();
+		if (type === "planets") actions.loadPlanets();
+		if (type === "vehicles") actions.loadVehicles();
 	}, [type]);
 
 	const items = store[type] || [];

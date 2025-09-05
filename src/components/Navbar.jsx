@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";
+import { Context } from "../appContext";
 
 export const Navbar = () => {
-	const { store, dispatch } = useGlobalReducer();
+	const { store, actions } = useContext(Context);
 
 	return (
 		<nav className="navbar navbar-dark bg-dark mb-3">
 			<div className="container">
 				<Link to="/" className="navbar-brand">Star Wars Blog</Link>
+
 				<div className="dropdown">
 					<button className="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown">
 						Read later ({store.favorites.length})
@@ -20,7 +21,7 @@ export const Navbar = () => {
 								<Link to={`/${f.type}/${f.uid}`}>{f.name}</Link>
 								<button
 									className="btn btn-sm btn-outline-danger"
-									onClick={() => dispatch.removeFavorite(f.type, f.uid)}>
+									onClick={() => actions.removeFavorite(f.type, f.uid)}>
 									&times;
 								</button>
 							</li>

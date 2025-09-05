@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";
+import { Context } from "../appContext";
 
 export const ItemCard = ({ type, item }) => {
-	const { dispatch } = useGlobalReducer();
+	const { actions } = useContext(Context);
 
 	const uid = item.uid;
 	const name = item.name;
@@ -23,7 +23,7 @@ export const ItemCard = ({ type, item }) => {
 					<Link to={`/${type}/${uid}`} className="btn btn-primary">Ver más</Link>
 					<button
 						className="btn btn-outline-warning"
-						onClick={() => dispatch.addFavorite({ type, uid, name })}>
+						onClick={() => actions.addFavorite({ type, uid, name })}>
 						⭐ Guardar
 					</button>
 				</div>

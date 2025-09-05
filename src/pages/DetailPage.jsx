@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";
+import { Context } from "../appContext";
 
 export const DetailPage = () => {
 	const { type, id } = useParams();
-	const { dispatch } = useGlobalReducer();
+	const { actions } = useContext(Context);
 	const [data, setData] = useState(null);
 
 	useEffect(() => {
-		dispatch.getDetail(type, id).then(setData);
+		actions.getDetail(type, id).then(setData);
 	}, [type, id]);
 
 	if (!data) return <div className="container py-4">Cargando...</div>;
